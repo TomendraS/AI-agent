@@ -1,0 +1,11 @@
+.chat-box {
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  padding: 1rem;
+}
+.msg { margin-bottom: 0.6rem; padding: 0.4rem 0.6rem; border-radius: 6px; }
+.msg.user { background: #007bff; color: white; text-align: right; }
+.msg.agent { background: #f1f1f1; color: #333; text-align: left; }
