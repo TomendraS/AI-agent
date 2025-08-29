@@ -103,8 +103,15 @@ async function callLLM(provider, model, apiKey, messages) {
         ]
       }),
     });
+
     const data = await res.json();
-    return { output: data.choices[0].message?.content, tool_calls: data.choices[0].message?.tool_calls };
+
+    // ✅ Guard against missing fields
+    const choice = data?.choices?.[0]?.message || {};
+    return {
+      output: choice.content || "",
+      tool_calls: choice.tool_calls || []
+    };
   }
 
   if (provider === "gemini") {
@@ -116,8 +123,17 @@ async function callLLM(provider, model, apiKey, messages) {
         contents: [{ parts: [{ text: messages[messages.length-1].content }]}]
       }),
     });
+
     const data = await res.json();
-    return { output: data.candidates[0].content.parts[0].text, tool_calls: [] };
+
+    // ✅ Guard against missing fields
+    const candidate = data?.candidates?.[0];
+    const text = candidate?.content?.parts?.[0]?.text || "⚠️ No output from Gemini";
+
+    return {
+      output: text,
+      tool_calls: [] // Gemini tool calls not implemented yet
+    };
   }
 
   throw new Error("Unsupported provider");
