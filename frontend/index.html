@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f8f9fa; }
+    .chat-box {
+      height: 400px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+    .msg { padding: 0.6rem; border-radius: 6px; margin-bottom: 0.8rem; }
+    .msg.user { background: #007bff; color: white; text-align: right; }
+    .msg.bot { background: #e9ecef; color: #333; text-align: left; }
+  </style>
+</head>
+<body>
+  <div class="container my-4">
+    <h2 class="text-center mb-4">🤖 AI Assistant</h2>
+
+    <!-- Settings -->
+    <div class="card mb-3">
+      <div class="card-header">Settings</div>
+      <div class="card-body row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Provider</label>
+          <select class="form-select" id="llm-provider">
+            <option value="openai">OpenAI</option>
+            <option value="gemini">Gemini</option>
+            <option value="demo">Demo Mode</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Model</label>
+          <input type="text" class="form-control" id="model-name" value="gpt-3.5-turbo">
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Section -->
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Conversation</span>
+        <button class="btn btn-sm btn-danger" id="clear-chat">Clear</button>
+      </div>
+      <div class="card-body">
+        <div id="conversation" class="chat-box"></div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="input-group">
+      <input type="text" id="user-input" class="form-control" placeholder="Type your message..." autocomplete="off">
+      <button class="btn btn-primary" id="send-btn">Send</button>
+    </div>
+
+    <footer class="text-center text-muted mt-4">
+      <small>AI Assistant | OpenAI + Gemini + Demo</small>
+    </footer>
+  </div>
+
+  <script src="agent.js"></script>
+</body>
+</html>
